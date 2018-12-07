@@ -149,21 +149,16 @@ public class DataloaderApplication {
 						String wineName = "";
 						Taster taster = null;
 						String tasterTwitterHandle = "";
-						
-						//todo stopped here
 						if (csvRecord.get(4) == null || csvRecord.get(4).trim().equals("")) {
 							continue;
 						} else {
 							description = csvRecord.get(2);
-							if(StringUtils.isNumeric(csvRecord.get(4))) {
+							if(StringUtils.isNumeric(csvRecord.get(4))) 
 								 points = Double.parseDouble(csvRecord.get(4));
-							}
-							if(csvRecord.get(11) != null && !csvRecord.get(11).trim().equals("")) {
+							if(csvRecord.get(11) != null && !csvRecord.get(11).trim().equals("")) 
 								wineName = csvRecord.get(11);
-							}
-							if(csvRecord.get(10) != null && !csvRecord.get(10).trim().equals("")) {
+							if(csvRecord.get(10) != null && !csvRecord.get(10).trim().equals("")) 
 								tasterTwitterHandle = csvRecord.get(10);;
-							}
 						}
 						if(wineName != null) {
 							List<Wine> wineList = wineR.findByWineName(wineName);
@@ -180,22 +175,11 @@ public class DataloaderApplication {
 						reviews.add(new Review(description, points, wine, taster));
 					}
 				}
-				
 				for (Review review : reviews) {
 					if(review.getDescriptionReview() != null) {
-						System.out.println("Review description:" + review.getDescriptionReview()
-						+" -- Points:" + review.getPoints());
-						if(review.getTaster() != null) {
-							System.out.println(" -- Taster name:" + review.getTaster().getTwitterhandlertaster());
-						}
-						if(review.getWine() != null) {
-							System.out.println(" -- Wine name:" + review.getWine().getWineName()	);
-						}
 						reviewR.save(review);
 					}
 				}
-				
-				System.out.println(" -------------- FINISHED -------------- ");
 			}
 		};
 	}
